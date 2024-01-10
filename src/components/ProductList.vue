@@ -6,6 +6,7 @@
         {{ product.name }} - {{ product.active }}
         <button @click="editProduct(product)">Editar</button>
         <button @click="toggleProductStatus(product)">Ativar/Inativar</button>
+        <button @click="associateProduct(product)">Associar Cliente</button>
       </li>
     </ul>
   </div>
@@ -18,22 +19,25 @@ export default defineComponent({
   name: 'ProductList',
   computed: {
     products() {
-      
       return this.$store.state.products;
     },
   },
   methods: {
     editProduct(product) {
-      
       console.log('Editando produto:', product);
     },
     toggleProductStatus(product) {
+      // Lógica para ativar/inativar o produto
       this.$store.commit('toggleProductStatus', product.id);
+    },
+    associateProduct(product) {
+      this.$router.push({ name: 'AssociateProduct', params: { productId: product.id } });
     },
   },
 });
 </script>
 
 <style scoped>
-
+/* Adicione estilos conforme necessário */
 </style>
+

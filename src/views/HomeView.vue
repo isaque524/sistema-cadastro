@@ -1,17 +1,23 @@
 <template>
   <div class="home">
-    <ProductFormVue/>
+    <ClientFormVue/>
+    <ClientListVue/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import ProductFormVue from '@/components/ProductForm.vue'
+import ClientFormVue from '@/components/ClientForm.vue'
+import ClientListVue from '@/components/ClientList.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    ProductFormVue
+    ClientFormVue,
+    ClientListVue
   }
 }
+
+
+
+
 </script>
