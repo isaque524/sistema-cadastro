@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="clientProdform" >
     <h2>Editar Produto</h2>
     <form @submit.prevent="saveChanges">
-      <label for="productName">Nome do Produto:</label>
-      <input type="text" id="productName" v-model="editedProduct.name" required>
 
-      <button type="submit">Salvar Alterações</button>
+      <div class="input-group mb-3">
+         <span class="input-group-text" for="productName">Nome do Produto:</span>
+  <input type="text" class="form-control" v-model="editedProduct.name" required >
+  <button  type="submit" >Salvar Alteração</button>
+</div>
+    
     </form>
   </div>
 </template>

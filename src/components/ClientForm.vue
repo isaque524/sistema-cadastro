@@ -1,45 +1,49 @@
-
 <template>
-  <div>
+  <div class="clientProdform">
     <h2>Cadastro de Clientes</h2>
     <form @submit.prevent="saveClient">
-      <label for="clientName">Nome do Cliente:</label>
-      <input type="text" id="clientName" v-model="client.name" required />
+      <div class="form-row">
+        <div class="form-group">
+          <label for="clientName">Nome do Cliente:</label>
+          <input type="text" id="clientName" v-model="client.name" required />
+        </div>
 
-      <label for="clientDocument">Documento:</label>
-      <input
-        type="text"
-        id="clientDocument"
-        v-model="client.document"
-        required
-      />
+        <div class="form-group">
+          <label for="clientDocument">Documento:</label>
+          <input type="text" id="clientDocument" v-model="client.document" required />
+        </div>
+      </div>
 
-      <label for="clientPhone">Telefone:</label>
-      <input type="text" id="clientPhone" v-model="client.phone" required />
+      <div class="form-row">
+        <div class="form-group">
+          <label for="clientPhone">Telefone:</label>
+          <input type="text" id="clientPhone" v-model="client.phone" required />
+        </div>
 
-      <label for="clientEmail">E-mail:</label>
-      <input type="email" id="clientEmail" v-model="client.email" required />
+        <div class="form-group">
+          <label for="clientEmail">E-mail:</label>
+          <input type="email" id="clientEmail" v-model="client.email" required />
+        </div>
+      </div>
 
-      <label for="clientActive">Ativo:</label>
-      <select id="clientActive" v-model="client.active" required>
-        <option value="Sim">Sim</option>
-        <option value="Não">Não</option>
-      </select>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="clientActive">Ativo:</label>
+          <select id="clientActive" v-model="client.active" required>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </div>
 
-       <label for="clientProducts">Produtos Associados:</label>
-    <select
-      id="clientProducts"
-      v-model="client.product" 
-      required
-    >
-      <option
-        v-for="product in availableProducts"
-        :key="product.id"
-        :value="product"
-      >
-        {{ product.name }}
-      </option>
-    </select>
+        <div class="form-group">
+          <label for="clientProducts">Produtos Associados:</label>
+          <select id="clientProducts" v-model="client.product" required>
+            <option v-for="product in availableProducts" :key="product.id" :value="product">
+              {{ product.name }}
+            </option>
+          </select>
+        </div>
+      </div>
 
       <button type="submit">Salvar</button>
     </form>
@@ -65,12 +69,10 @@ export default defineComponent({
   },
 
   computed: {
-  availableProducts() {
- 
-    return this.$store.state.products;
+    availableProducts() {
+      return this.$store.state.products;
+    },
   },
-},
-
 
   methods: {
     saveClient() {
@@ -85,7 +87,7 @@ export default defineComponent({
         product: "",
       };
     },
-
   },
 });
 </script>
+
