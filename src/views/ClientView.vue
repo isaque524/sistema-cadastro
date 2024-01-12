@@ -9,6 +9,8 @@
 import ClientFormVue from '@/components/ClientForm.vue'
 import ClientListVue from '@/components/ClientList.vue'
 
+
+
 export default {
   name: 'HomeView',
   components: {

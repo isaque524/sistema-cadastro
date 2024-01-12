@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <h2>Cadastro de Clientes</h2>
@@ -25,6 +26,21 @@
         <option value="Não">Não</option>
       </select>
 
+       <label for="clientProducts">Produtos Associados:</label>
+    <select
+      id="clientProducts"
+      v-model="client.product" 
+      required
+    >
+      <option
+        v-for="product in availableProducts"
+        :key="product.id"
+        :value="product"
+      >
+        {{ product.name }}
+      </option>
+    </select>
+
       <button type="submit">Salvar</button>
     </form>
   </div>
@@ -32,7 +48,6 @@
 
 <script>
 import { defineComponent } from "vue";
-import emitter from "@/eventBus";
 
 export default defineComponent({
   name: "ClientForm",
@@ -43,18 +58,19 @@ export default defineComponent({
         document: "",
         phone: "",
         email: "",
-        active: "Sim",
+        active: "",
+        product: "",
       },
     };
   },
 
-  created() {
-    emitter.on("client-updated", this.handleClientUpdated);
+  computed: {
+  availableProducts() {
+ 
+    return this.$store.state.products;
   },
+},
 
-  beforeUnmount() {
-    emitter.off("client-updated", this.handleClientUpdated);
-  },
 
   methods: {
     saveClient() {
@@ -65,31 +81,11 @@ export default defineComponent({
         document: "",
         phone: "",
         email: "",
-        active: "Sim",
+        active: "",
+        product: "",
       };
     },
 
-    handleClientUpdated(updatedClient) {
-      alert("Cliente atualizado:", updatedClient);
-    },
-    async saveChanges() {
-      try {
-        const clientId = this.$route.params.clientId;
-        this.$store.commit("updateClient", {
-          clientId: clientId,
-          updatedClient: this.editedClient,
-        });
-
-        emitter.emit("client-updated", {
-          clientId: clientId,
-          updatedClient: this.editedClient,
-        });
-        alert("Alterações salvas com sucesso.");
-      } catch (error) {
-        console.error("Erro ao salvar as alterações:", error);
-        alert("Erro ao salvar as alterações:");
-      }
-    },
   },
 });
 </script>

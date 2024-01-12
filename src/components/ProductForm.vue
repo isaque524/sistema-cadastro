@@ -19,6 +19,7 @@
 <script>
 import { defineComponent } from 'vue';
 
+
 export default defineComponent({
   name: 'ProductForm',
   data() {
@@ -36,9 +37,13 @@ export default defineComponent({
 
       this.product = { name: '', active: 'Sim' };
     },
+
+  
   },
 });
 </script>
 
 <style scoped>
+
 </style>
+

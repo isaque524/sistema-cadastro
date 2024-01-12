@@ -25,19 +25,20 @@ export default defineComponent({
   methods: {
     editProduct(product) {
       console.log('Editando produto:', product);
+      this.$router.push({ name: 'EditProduct', params: { productId: product.id } });
     },
     toggleProductStatus(product) {
-      // Lógica para ativar/inativar o produto
       this.$store.commit('toggleProductStatus', product.id);
     },
-    associateProduct(product) {
-      this.$router.push({ name: 'AssociateProduct', params: { productId: product.id } });
+    associateProduct() {
+      this.$router.push({ name: 'AssociarClientProduct'});
     },
   },
 });
 </script>
 
 <style scoped>
-/* Adicione estilos conforme necessário */
+
 </style>
+
 

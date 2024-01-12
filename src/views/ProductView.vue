@@ -7,7 +7,6 @@
 
 <script>
 
-// @ is an alias to /src
 import ProductListVue from '@/components/ProductList.vue'
 import ProductFormVue from '@/components/ProductForm.vue'
 
