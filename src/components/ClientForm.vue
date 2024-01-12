@@ -50,6 +50,7 @@
         <div class="form-group">
           <label for="clientProducts">Produtos Associados:</label>
           <select id="clientProducts" v-model="client.product" required>
+           <option v-if="availableProducts.length === 0" value="" disabled>Adicione um produto primeiro</option>
             <option v-for="product in availableProducts" :key="product.id" :value="product">
               {{ product.name }}
             </option>
@@ -119,3 +120,5 @@ export default defineComponent({
   },
 });
 </script>
+
+
