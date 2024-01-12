@@ -16,8 +16,20 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label for="clientPhone">Telefone:</label>
-          <input type="text" id="clientPhone" v-model="client.phone" required />
+          <label for="clientPhone">Telefone/Celular:</label>
+          <input
+          placeholder="EX:21999999999"
+            type="text"
+            id="clientPhone"
+            maxlength="11"
+            v-model="client.phone"
+            :class="{ valid: isValidPhoneNumber, invalid: !isValidPhoneNumber }"
+            @keyup="validatePhoneNumber"
+            required
+          />
+          <div class="text-danger mrgnbtn" v-if="!isValidPhoneNumber">
+            Número de telefone inválido
+          </div>
         </div>
 
         <div class="form-group">
@@ -65,6 +77,7 @@ export default defineComponent({
         active: "",
         product: "",
       },
+      isValidPhoneNumber: true,
     };
   },
 
@@ -75,7 +88,22 @@ export default defineComponent({
   },
 
   methods: {
+    validatePhoneNumber() {
+      // Pode ajustar a expressão regular conforme necessário
+         const validationRegex = /^[0-9]{8,11}$/;
+      if (this.client.phone.match(validationRegex)) {
+        this.isValidPhoneNumber = true;
+      } else {
+        this.isValidPhoneNumber = false;
+      }
+    },
+
     saveClient() {
+      if (!this.isValidPhoneNumber) {
+        // Faça algo aqui se o número de telefone for inválido
+        return;
+      }
+
       const newClient = { ...this.client, id: Date.now() };
       this.$store.commit("addClient", newClient);
       this.client = {
@@ -86,8 +114,8 @@ export default defineComponent({
         active: "",
         product: "",
       };
+      this.isValidPhoneNumber = true; // Reinicia o estado da validação após salvar
     },
   },
 });
 </script>
-

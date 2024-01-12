@@ -1,5 +1,3 @@
-<!-- EditClient.vue -->
-
 <template>
   <div class="clientProdform">
     <h2>Editar Cliente</h2>
@@ -28,14 +26,22 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label for="clientPhone">Telefone:</label>
+          <label for="clientPhone">Telefone/Celular:</label>
           <input
+           placeholder="EX:21999999999"
             type="text"
             id="clientPhone"
+            maxlength="11"
             v-model="editedClient.phone"
+            :class="{ valid: isValidPhoneNumber, invalid: !isValidPhoneNumber }"
+            @keyup="validatePhoneNumber"
             required
           />
+          <div class="text-danger mrgnbtn" v-if="!isValidPhoneNumber">
+            Número de telefone inválido
+          </div>
         </div>
+
         <div class="form-group">
           <label for="clientEmail">E-mail:</label>
           <input
@@ -62,6 +68,7 @@ export default {
         phone: "",
         email: "",
       },
+      isValidPhoneNumber: true,
     };
   },
   created() {
@@ -86,8 +93,22 @@ export default {
       }
     },
 
+    validatePhoneNumber() {
+      const validationRegex = /^[0-9]{8,11}$/;
+      if (this.editedClient.phone.match(validationRegex)) {
+        this.isValidPhoneNumber = true;
+      } else {
+        this.isValidPhoneNumber = false;
+      }
+    },
+
     async saveChanges() {
       try {
+        if (!this.isValidPhoneNumber) {
+          // Faça algo aqui se o número de telefone for inválido
+          return;
+        }
+
         const clientId = parseInt(this.clientId, 10);
 
         this.$store.commit("updateClient", {

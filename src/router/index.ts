@@ -6,12 +6,12 @@ import EditProduct from "../components/EditProduct.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/produto",
+    path: "/",
     name: "Produto",
     component: About,
   },
   {
-    path: "/",
+    path: "/cliente",
     name: "Cliente",
     component: Home,
   },
